@@ -20,19 +20,23 @@ class Catalogue {
     const removedProduct = this.findProductById(id);
     if (removedProduct) {
       this.products = this.products.filter(
-        (product) => product.id !== id 
+        (product) => product.id !== id
       );
     }
     return removedProduct;
   }
   checkReorders() {
     const result = { type: "Reorder", productIds: [] };
-    result.productIds = this.products.filter((p) => 
-      p.quantityInStock <= p.reorderLevel) 
-        .map((p) => p.id);
-      
-    
+    result.productIds = this.products.filter((p) =>
+      p.quantityInStock <= p.reorderLevel)
+      .map((p) => p.id);
+
+
     return result;
+  }
+  batchAddProducts(batch) {
+    batch.products.forEach(p => this.addProduct(p))
+    return batch.products.length
   }
 
 }
