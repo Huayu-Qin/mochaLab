@@ -35,9 +35,14 @@ class Catalogue {
     return result;
   }
   batchAddProducts(batch) {
-    const validAdditions = batch.products.filter(
-      (product) => product.quantityInStock > 0
-    )
+    const invalidAdditions = batch.products.filter(
+      (product) => this.findProductById(product.id) !== undefined
+    );
+    if (invalidAdditions.length > 0){
+      throw new Error('Bad Batch')
+    }
+    const validAdditions = batch.products.filter((product) => product.quantityInStock > 0
+    );
     validAdditions.forEach((p) => this.addProduct(p) );
     return validAdditions.length;
   }
