@@ -50,5 +50,15 @@ class Catalogue {
     return noProductsAdded;
   }
 
+  search(criteria) {
+    const result = {type: "Search", Markedproducts: [] }
+    result.Markedproducts = this.products.filter((p) =>
+    p.price <= criteria.price)
+    .map((p) => p.id);
+    return result;
+
+    
+  }
+
 }
 module.exports = Catalogue;

@@ -92,4 +92,24 @@ describe("Catalogue", () => {
             expect(rejectedProduct).to.be.undefined; 
           });
     });
+    describe('search',() => {
+        //beforeEach(function(){
+        //    criterial = {
+        //        type:'Search',
+        //        products:[
+        //            new Product("A129", "shoes", 1, 10, 12),
+        //            new Product("A130", "shower clothes", 2, 10, 25),
+        //            new Product("A131", "bag", 2, 10, 30),
+        //        ]
+        //    }
+        //})
+        it("should return the products whose price is less than (or equal to) the specified value",() => {
+            cat.addProduct(new Product("A129", "shoes", 1, 10, 12));
+            cat.addProduct(new Product("A130", "shower clothes", 2, 10, 25));
+            cat.addProduct(new Product("A131", "bag", 2, 10, 30))
+            const result = cat.search({'price' : 25})
+            expect(result.Markedproducts).to.have.lengthOf(4)
+            expect(result.Markedproducts).to.have.members(["A123","A125","A129","A130"]);
+        })
+    })
 });
