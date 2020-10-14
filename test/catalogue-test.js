@@ -94,7 +94,7 @@ describe("Catalogue", () => {
     });
     describe('search',() => {
         //beforeEach(function(){
-        //    criterial = {
+        //    criteria = {
         //        type:'Search',
         //        products:[
         //            new Product("A129", "shoes", 1, 10, 12),
@@ -113,10 +113,14 @@ describe("Catalogue", () => {
         })
         it("should return the products with the keyword in their name",() => {
             cat.addProduct(new Product("A132", "shoulder bag", 1, 10, 12));
-        
             const result = cat.search({ keyword: 'sho' })
             expect(result.MarkedProducts).to.have.lengthOf(1)
             expect(result.MarkedProducts).to.have.members(["A132"]);
+        })
+        it("should throw an exception when the criteria object has neither key",() => {
+            cat.addProduct(new Product("A133", 1, 10, ));
+            expect(() => cat.search( {key: "Widget"})).to.throw("Bad Batch");
+
         })
     })
 });

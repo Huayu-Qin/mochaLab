@@ -57,12 +57,15 @@ class Catalogue {
        p.price <= criteria.price)
        .map((p) => p.id)
       return result;
-    }else if(criteria.keyword !== undefined){
+    }if(criteria.keyword !== undefined){
       result.MarkedProducts = this.products.filter((p) => 
        p.name.search(criteria.keyword) >= 0 )
        .map((p) => p.id)
       return result;
-    }  
+    }else if(!(criteria.price || criteria.keyword)){
+          throw new Error('Bad Batch')
+      
+    }
   }
 }
 module.exports = Catalogue;
