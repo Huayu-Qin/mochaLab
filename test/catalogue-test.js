@@ -107,9 +107,16 @@ describe("Catalogue", () => {
             cat.addProduct(new Product("A129", "shoes", 1, 10, 12));
             cat.addProduct(new Product("A130", "shower clothes", 2, 10, 25));
             cat.addProduct(new Product("A131", "bag", 2, 10, 30))
-            const result = cat.search({'price' : 25})
-            expect(result.Markedproducts).to.have.lengthOf(4)
-            expect(result.Markedproducts).to.have.members(["A123","A125","A129","A130"]);
+            const result = cat.search({price: 25})
+            expect(result.MarkedProducts).to.have.lengthOf(4)
+            expect(result.MarkedProducts).to.have.members(["A123","A125","A129","A130"]);
+        })
+        it("should return the products with the keyword in their name",() => {
+            cat.addProduct(new Product("A132", "shoulder bag", 1, 10, 12));
+        
+            const result = cat.search({ keyword: 'sho' })
+            expect(result.MarkedProducts).to.have.lengthOf(1)
+            expect(result.MarkedProducts).to.have.members(["A132"]);
         })
     })
 });

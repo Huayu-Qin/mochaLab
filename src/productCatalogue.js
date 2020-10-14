@@ -51,14 +51,18 @@ class Catalogue {
   }
 
   search(criteria) {
-    const result = {type: "Search", Markedproducts: [] }
-    result.Markedproducts = this.products.filter((p) =>
-    p.price <= criteria.price)
-    .map((p) => p.id);
-    return result;
-
-    
+    const result = {type: "Search", MarkedProducts: [] }
+    if(criteria.price !== undefined){
+      result.MarkedProducts = this.products.filter((p) =>
+       p.price <= criteria.price)
+       .map((p) => p.id)
+      return result;
+    }else if(criteria.keyword !== undefined){
+      result.MarkedProducts = this.products.filter((p) => 
+       p.name.search(criteria.keyword) >= 0 )
+       .map((p) => p.id)
+      return result;
+    }  
   }
-
 }
 module.exports = Catalogue;
